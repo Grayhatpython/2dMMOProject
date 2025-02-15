@@ -55,8 +55,16 @@ void ThreadManager::InitTLS()
 
 void ThreadManager::DestroyTLS()
 {
-	delete LThreadCallStackInfo;
-	delete LThreadCacheMemory;
+	if (LThreadCallStackInfo)
+	{
+		delete LThreadCallStackInfo;
+		LThreadCallStackInfo = nullptr;
+	}
+	if (LThreadCacheMemory)
+	{
+		delete LThreadCacheMemory;
+		LThreadCacheMemory = nullptr;
+	}
 }
 
 void ThreadManager::DoGlobalJobQueueExecute()
@@ -84,7 +92,7 @@ void ThreadManager::DistributeReserveJobs()
 {
 	const uint64 now = ::GetTickCount64();
 
-	//GJobTimer->Distribute(now);
+	GJobTimer->Distribute(now);
 }
 
 void ThreadManager::Close()

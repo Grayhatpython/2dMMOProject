@@ -17,7 +17,7 @@ public:
 	
 
 
-	void								SetCurrentScene(std::shared_ptr<Scene> gameScene);
+	void								SetCurrentScene(std::shared_ptr<Scene> scene);
 
 private:
 	std::shared_ptr<Scene>				_currentScene = nullptr;

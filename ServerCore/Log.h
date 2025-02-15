@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include "SwapQueue.h"
 
 inline void SetConsoleColor(WORD attributes) {

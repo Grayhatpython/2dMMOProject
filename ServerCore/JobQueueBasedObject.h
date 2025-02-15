@@ -6,14 +6,14 @@
 class JobQueueBasedObject : public std::enable_shared_from_this<JobQueueBasedObject>
 {
 public:
-	void PushJob(CallbackType&& callback, bool isPushOnly = true)
+	void PushJob(CallbackType&& callback, bool isPushOnly = false)
 	{
 		auto job = ObjectPool<Job>::MakeShared(std::move(callback));
 		Push(std::move(job), isPushOnly);
 	}
 
 	template<typename T, typename Ret, typename... Args>
-	void PushJob(Ret(T::*memFunc)(Args...), bool isPushOnly = true, Args... args)
+	void PushJob(Ret(T::*memFunc)(Args...), bool isPushOnly = false, Args... args)
 	{
 		//	Ref Count Áõ°¡ -> Cycle Check
 		shared_ptr<T> owner = static_pointer_cast<T>(shared_from_this());

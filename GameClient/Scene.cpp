@@ -80,7 +80,8 @@ void Scene::Update()
 		actor->Update();
 	_updatingActors = false;
 
-	_camera->Update();
+	if(_camera)
+		_camera->Update();
 
 	for (auto& pending : _pendingActors)
 	{

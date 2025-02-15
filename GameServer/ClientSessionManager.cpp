@@ -2,8 +2,6 @@
 #include "ClientSessionManager.h"
 #include "ClientSession.h"
 
-ClientSessionManager* GClientSessionManager = nullptr;
-
 void ClientSessionManager::Add(ClientSessionRef session)
 {
 	WRITE_LOCK;

@@ -2,7 +2,6 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #include "GameServer.h"
-#include "Room.h"
 #include "DBBind.h"
 #include "DBConnectionPool.h"
 #include "Exception.h"
@@ -51,6 +50,7 @@ int main()
 		gameServer->DoProcessJob();
 	}
 
+	gameServer->Close();
 	delete gameServer;
 
 	system("pause");

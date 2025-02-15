@@ -4,12 +4,9 @@
 #include "ClientPacketHandler.h"
 #include "GameServer.h"
 #include "ClientSession.h"
-#include "Room.h"
-#include "ClientSessionManager.h"
 #include "Monitoring.h"
-#include "GameObjectManager.h"
-#include "WorldManager.h"
-#include "DataManager.h"
+#include "Manager.h"
+#include <DBConnectionPool.h>
 
 GameServer::~GameServer()
 {
@@ -18,25 +15,20 @@ GameServer::~GameServer()
 
 bool GameServer::Initialize()
 {
+	Manager::GetInstance()->Initialize();
+	Manager::GetInstance()->GetConfigManager()->LoadServerConfigInfo("../Common/config.json");
+
 	ClientPacketHandler::Initialize();
 
-	GClientSessionManager = new ClientSessionManager();
-	
-	GGameObjectManager = new GameObjectManager();
-	GGameObjectManager->Initialize();
+	const auto& serverConfigInfo = Manager::GetInstance()->GetConfigManager()->GetServerConfigInfo();
 
-	GDataManager = new DataManager();
-	GDataManager->LoadData();
-
-	GWorldManager = new WorldManager();
-
-	GRoom = make_shared<Room>();
+	ASSERT_CRASH(GDBConnectionPool->Connect(1, serverConfigInfo.connectionString.c_str()));
 
 	_service = MakeShared<ServerService>(
-		NetAddress(L"127.0.0.1", 7777),
+		NetAddress(serverConfigInfo.ip, serverConfigInfo.port),
 		MakeShared<IocpCore>(),
 		MakeShared<ClientSession>, // TODO : SessionManager 등
-		100);
+		10);
 
 	ASSERT_CRASH(_service);
 
@@ -52,26 +44,26 @@ bool GameServer::Start()
 
 void GameServer::DoProcessJob()
 {
-	Monitoring m;
+	/*Monitoring m;
 	{
 		GThreadManager->Launch([&m]()
 			{
 				m.Print();
 				std::this_thread::sleep_for(1s);
 			}, L"Monitoring Thread");
-	}
+	}*/
 
-	for (int32 i = 0; i < 2; i++)
+	for (int32 i = 0; i < 5; i++)
 	{
 		//	Ref Count No Add
-		GThreadManager->Launch([this]()
+		GThreadManager->Launch([service = _service]()
 			{
 				LEndTickCount = ::GetTickCount64() + PROCESS_TICK;
 
 				//	I/O ( JobQueue Push MultiThread )
 				//	Game Logic ( JobQueue Execute -> One Thread )
-				if(_service)
-					_service->GetIocpCore()->Dispatch(10);
+				if(service)
+					service->GetIocpCore()->Dispatch(10);
 
 				//	Global Reserve Jobs Push JobQueue
 				//ThreadManager::DistributeReserveJobs();
@@ -82,6 +74,15 @@ void GameServer::DoProcessJob()
 			},L"Worker Thread");
 	}
 
+	auto dbManager = Manager::GetDBManager();
+	GThreadManager->Launch([db = dbManager]()
+		{
+			db->PopAllExecute();
+			std::this_thread::sleep_for(100ms);
+		}, L"DB Thread");
+
+	Manager::GetDBManager()->Test();
+
 	//	Thread Join
 	//GThreadManager->Join();
 	while (_stopped == false)
@@ -89,38 +90,21 @@ void GameServer::DoProcessJob()
 		//GRoom->Update();
 		
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
-		{
-			Close();
 			break;
-		}
 
-		std::this_thread::yield();
+		std::this_thread::sleep_for(10ms);
 	}
 }
 
 void GameServer::Close()
 {
 	_stopped = true;
-
-	delete GGameObjectManager;
-	GGameObjectManager = nullptr;
-
-	delete GDataManager;
-	GDataManager = nullptr;
-
-	delete GWorldManager;
-	GWorldManager = nullptr; 
-
+ 
 	_service->CloseService();
 	GSendBufferManager->Close();
-
-	//	TEMP
-	GRoom = nullptr;
-
-	delete GClientSessionManager;
-	GClientSessionManager = nullptr;
-
 	_service = nullptr;
+
+	Manager::GetInstance()->Clear();
 
 	GCoreGlobal->Clear();
 	delete GCoreGlobal;

@@ -18,8 +18,14 @@
 #include "CorePch.h"
 #include "Enum.pb.h"
 #include "Struct.pb.h"
+#include "Protocol.pb.h"
 
 #include "Enums.h"
 #include "Math.h"
 
 using namespace Enums;
+
+using ServerSessionRef = std::shared_ptr<class ServerSession>;
+using ServerInstanceRef = std::shared_ptr<class ServerInstance>;
+using PacketMessageRef = std::shared_ptr<struct PacketMessage>;
+using PacketQueueRef = std::shared_ptr<class PacketQueue>;

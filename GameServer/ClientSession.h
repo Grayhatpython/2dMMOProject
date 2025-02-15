@@ -15,7 +15,7 @@ public:
 public:
 	//	언제라도 바뀔 수 있는 스마트포인터 
 	//Atomic<PlayerRef>		_player;
-	PlayerRef				_player;
+	//PlayerRef				_player;
 
 
 	//Vector<PlayerRef>		_players;	//	Cycle

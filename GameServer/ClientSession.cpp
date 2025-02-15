@@ -1,9 +1,7 @@
 #include "pch.h"
 #include "ClientSession.h"
-#include "ClientSessionManager.h"
 #include "ClientPacketHandler.h"
-#include "Room.h"
-#include "Player.h"
+#include "Manager.h"
 
 ClientSession::~ClientSession()
 {
@@ -13,7 +11,7 @@ ClientSession::~ClientSession()
 void  ClientSession::OnConnected() 
 {
 	cout << "ClientSession Connected" << endl;
-	GClientSessionManager->Add(static_pointer_cast<ClientSession>(shared_from_this()));
+	Manager::GetInstance()->GetClientSessionManager()->Add(static_pointer_cast<ClientSession>(shared_from_this()));
 }
 
 void ClientSession::OnRecvPacket(BYTE* buffer, int32 len)
@@ -30,13 +28,13 @@ void  ClientSession::OnSend(int32 len)
 
 void  ClientSession::OnDisconnected() 
 {
-	GClientSessionManager->Remove(static_pointer_cast<ClientSession>(shared_from_this()));
+	Manager::GetInstance()->GetClientSessionManager()->Remove(static_pointer_cast<ClientSession>(shared_from_this()));
 
-	if (_player)
-	{
-		if (auto room = _player->_room.lock())
-			room->PushJob(&Room::Leave, true, _player->_objectInfo->objectid());
-	}
+	//if (_player)
+	//{
+	//	if (auto room = _player->_room.lock())
+	//		room->PushJob(&Room::Leave, true, _player->_objectInfo->objectid());
+	//}
 
-	_player = nullptr;
+	//_player = nullptr;
 }

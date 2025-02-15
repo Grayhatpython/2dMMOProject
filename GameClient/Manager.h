@@ -6,6 +6,7 @@
 #include "AssetManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
+#include "NetworkManager.h"
 
 class Manager
 {
@@ -28,6 +29,7 @@ public:
 	static AssetManager* GetAssetManager() { return GetInstance()->_asset.get(); }
 	static InputManager* GetInputManager() { return GetInstance()->_input.get(); }
 	static PhysicsManager* GetPhysicsManager() { return GetInstance()->_physics.get(); }
+	static NetworkManager* GetNetworkManager() { return GetInstance()->_network.get(); }
 
 public:
 	void Initialize();
@@ -47,5 +49,6 @@ private:
 	std::unique_ptr<AssetManager>		_asset;
 	std::unique_ptr<InputManager>		_input;
 	std::unique_ptr<PhysicsManager>		_physics;
+	std::unique_ptr<NetworkManager>		_network;
 };
 

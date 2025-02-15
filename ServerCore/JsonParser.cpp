@@ -17,11 +17,12 @@ bool JsonParser::ParseFromFile(const CHAR* path, OUT rapidjson::Document& docume
 
 	// Load raw data into RapidJSON document
 	document.Parse(data.data());
-	assert(document.IsObject());
+	assert(document.HasParseError() == false);
 
 	return true;
 }
 
+//	수정 필요
 int32 JsonParser::GetInt(const rapidjson::Value& obj, const CHAR* member)
 {
 	auto iter = obj.FindMember(member);

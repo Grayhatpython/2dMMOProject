@@ -84,7 +84,6 @@ public:
 	void			Push(int32 allocSize, MemoryHeader* memoryBlock);
 	MemoryHeader*	Pop(int32 allocSize);
 
-	void			Clear();
 
 public:
 	bool			IsEmptyMemoryBlocks(int32 allocSize);

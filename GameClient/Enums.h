@@ -1,4 +1,5 @@
 #pragma once
+#include <Types.h>
 #include "Math.h"
 
 namespace Enums
@@ -51,6 +52,7 @@ namespace Enums
 	enum class SceneType
 	{
 		None,
+		Title,
 		Play,
 	};
 
@@ -59,6 +61,16 @@ namespace Enums
 		Play,
 		Paused,
 		Quit,
+	};
+
+	enum class TitleSceneState
+	{
+		None,
+		AssetLoading,
+		AssetLoaded,
+		ConnectingToServer,
+		ConnectedToServer,
+		FailedToConnectToServer,
 	};
 
 #pragma endregion
@@ -92,6 +104,15 @@ namespace Enums
 	{
 		Active,
 		Close
+	};
+
+#pragma endregion
+
+#pragma region Network
+
+	enum class ServerType
+	{
+		GameServer = 0,
 	};
 
 #pragma endregion

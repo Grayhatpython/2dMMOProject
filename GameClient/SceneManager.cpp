@@ -10,11 +10,11 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::SetCurrentScene(std::shared_ptr<Scene> gameScene)
+void SceneManager::SetCurrentScene(std::shared_ptr<Scene> scene)
 {
 	Clear();
 
-	_currentScene = gameScene;
+	_currentScene = scene;
 	_currentScene->Initialize();
 }
 

@@ -19,6 +19,9 @@
     <Filter Include="DB">
       <UniqueIdentifier>{6bf23c72-d753-460e-8702-63a3ea728f87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{e7173dce-be7c-40ba-a198-29c0ef32b006}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -36,40 +39,37 @@
     <ClCompile Include="Enum.pb.cc">
       <Filter>Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameContents</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>GameContents</Filter>
-    </ClCompile>
     <ClCompile Include="ClientPacketHandler.cpp">
       <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="ClientSession.cpp">
       <Filter>Network</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSessionManager.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="Math.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Creature.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="Random.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>GameContents</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldManager.cpp">
-      <Filter>GameContents</Filter>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="DataManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSessionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
       <Filter>GameContents</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,16 +86,7 @@
     <ClInclude Include="Struct.pb.h">
       <Filter>Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>GameContents</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameContents</Filter>
-    </ClInclude>
     <ClInclude Include="ClientPacketHandler.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientSessionManager.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="ClientSession.h">
@@ -104,22 +95,28 @@
     <ClInclude Include="GameServer.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="Math.h">
+      <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="Random.h">
+      <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Creature.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="Manager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="DBManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="WorldManager.h">
-      <Filter>GameContents</Filter>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSessionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
       <Filter>GameContents</Filter>
     </ClInclude>
   </ItemGroup>

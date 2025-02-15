@@ -3,6 +3,7 @@
 #include "Manager.h"
 #include "TimeManager.h"
 #include "PlayScene.h"
+#include "TitleScene.h"
 
 Game::Game()
 {
@@ -14,7 +15,7 @@ bool Game::Initialize()
 	Manager::GetInstance()->Initialize();
 	Manager::GetRenderManager()->Initialize(1280, 720);
 
-	std::shared_ptr<PlayScene> scene = std::make_shared<PlayScene>();
+	std::shared_ptr<TitleScene> scene = std::make_shared<TitleScene>();
 	Manager::GetSceneManager()->SetCurrentScene(scene);
 
 	return true;
@@ -42,6 +43,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
+	Manager::GetNetworkManager()->Update();
 	Manager::GetTimeManager()->Update();
 	Manager::GetSceneManager()->Update();
 	Manager::GetPhysicsManager()->Update();
@@ -55,5 +57,13 @@ void Game::Redner()
 void Game::Shutdown()
 {
 	Manager::GetInstance()->Clear();
+
+	GSendBufferManager->Close();
+
+	GCoreGlobal->Clear();
+	delete GCoreGlobal;
+	GCoreGlobal = nullptr;
+
+	google::protobuf::ShutdownProtobufLibrary();
 }
 

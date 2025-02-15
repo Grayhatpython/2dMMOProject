@@ -104,17 +104,23 @@ void* Memory::Allocate(int32 size)
 	{
 		const int32 allocSize = _poolTable[memorySize]->GetAllocSize();
 
-		if (LThreadCacheMemory->IsEmptyMemoryBlocks(allocSize))
+		if (LThreadCacheMemory)
 		{
-			for (int i = 0; i < ThreadCacheMemory::MEMORY_BLOCK_REQUEST_CHUNK_SIZE; i++)
+			if (LThreadCacheMemory->IsEmptyMemoryBlocks(allocSize))
 			{
-				// 메모리 풀에서 꺼내온다
-				header = _poolTable[allocSize]->Pop();
-				LThreadCacheMemory->Push(allocSize, header);
+				for (int i = 0; i < ThreadCacheMemory::MEMORY_BLOCK_REQUEST_CHUNK_SIZE; i++)
+				{
+					// 메모리 풀에서 꺼내온다
+					header = _poolTable[allocSize]->Pop();
+					LThreadCacheMemory->Push(allocSize, header);
+				}
 			}
+
+			header = LThreadCacheMemory->Pop(allocSize);
 		}
-			
-		header = LThreadCacheMemory->Pop(allocSize);
+		else
+			// 메모리 풀에서 꺼내온다
+			header = _poolTable[allocSize]->Pop();
 	}
 
 	return MemoryHeader::AttachHeader(header, memorySize);
@@ -135,17 +141,25 @@ void Memory::Release(void* ptr)
 	else
 	{
  		const int32 allocSize = _poolTable[memorySize]->GetAllocSize();
-		LThreadCacheMemory->Push(allocSize, header);
 
-		// 메모리 풀에 반납한다
-		//_poolTable[allocSize]->Push(header);
+		if(LThreadCacheMemory)
+			LThreadCacheMemory->Push(allocSize, header);
+		else
+		//	 메모리 풀에 반납한다
+			_poolTable[allocSize]->Push(header);
 	}
 }
 
 
 ThreadCacheMemory::~ThreadCacheMemory()
 {
-	Clear();
+	for (auto& memoryBlock : _memoryBlocks)
+	{
+		for (auto memory : memoryBlock.second)
+		{
+			::_aligned_free(memory);
+		}
+	}
 }
 
 void ThreadCacheMemory::Push(int32 allocSize, MemoryHeader* memoryBlock)
@@ -159,17 +173,6 @@ MemoryHeader* ThreadCacheMemory::Pop(int32 allocSize)
 	MemoryHeader* memoryBlock = memoryBlocks.back();
 	memoryBlocks.pop_back();
 	return memoryBlock;
-}
-
-void ThreadCacheMemory::Clear()
-{
-	for (auto& memoryBlocks : _memoryBlocks)
-	{
-		for (auto memory : memoryBlocks.second)
-		{
-			::_aligned_free(memory);
-		}
-	}
 }
 
 bool ThreadCacheMemory::IsEmptyMemoryBlocks(int32 allocSize)

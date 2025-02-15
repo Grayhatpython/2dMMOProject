@@ -121,8 +121,8 @@ void RenderManager::Render()
 		auto fcc = camera->GetFollowCameraComponent();
 		const Vector2& cameraOffset = fcc->GetCameraOffset();
 
-		uint32 width = grid->GetTileSize();
-		uint32 height = grid->GetTileSize();
+		uint32 width = static_cast<uint32>(grid->GetTileSize());
+		uint32 height = static_cast<uint32>(grid->GetTileSize());
 
 		uint32 startXIndex = static_cast<uint32>(cameraOffset.x / width);
 		uint32 startYIndex = static_cast<uint32>(cameraOffset.y / height);

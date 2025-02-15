@@ -1,9 +1,6 @@
 #pragma once
 
 class ClientSession;
-
-using ClientSessionRef = shared_ptr<ClientSession>;
-
 class ClientSessionManager
 {
 public:
@@ -16,4 +13,3 @@ private:
 	Set<ClientSessionRef> _sessions;
 };
 
-extern ClientSessionManager* GClientSessionManager;
