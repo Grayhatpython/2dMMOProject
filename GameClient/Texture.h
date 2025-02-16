@@ -5,6 +5,7 @@ class Texture
 {
 public:
 	friend class SpriteComponent;
+	friend class AnimSingleSpriteComponent;
 
 	~Texture();
 

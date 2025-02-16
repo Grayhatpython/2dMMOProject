@@ -86,7 +86,7 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>GameContent\Component</Filter>
     </ClCompile>
-    <ClCompile Include="AnimSpriteComponent.cpp">
+    <ClCompile Include="AnimMultipleSpriteComponent.cpp">
       <Filter>GameContent\Component</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
@@ -188,6 +188,9 @@
     <ClCompile Include="PacketQueue.cpp">
       <Filter>Network</Filter>
     </ClCompile>
+    <ClCompile Include="AnimSingleSpriteComponent.cpp">
+      <Filter>GameContent\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -244,7 +247,7 @@
     <ClInclude Include="SpriteComponent.h">
       <Filter>GameContent\Component</Filter>
     </ClInclude>
-    <ClInclude Include="AnimSpriteComponent.h">
+    <ClInclude Include="AnimMultipleSpriteComponent.h">
       <Filter>GameContent\Component</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
@@ -342,6 +345,9 @@
     </ClInclude>
     <ClInclude Include="PacketQueue.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSingleSpriteComponent.h">
+      <Filter>GameContent\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

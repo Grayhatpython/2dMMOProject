@@ -103,7 +103,34 @@ void RenderManager::Render()
 	//	if(sprite->GetOwner())
 	//		sprite->Render();
 	//}
+	
+	GridRender();
 
+	const auto& actors = Manager::GetSceneManager()->GetCurrentScene()->GetActors();
+	for (const auto& actor : actors)
+	{
+		auto sc = actor->GetSpriteComponent();
+		if (actor->GetState() == ActorState::Active && sc)
+			sc->Render();
+	}
+
+	const auto& uis = Manager::GetSceneManager()->GetCurrentScene()->GetUis();
+	for (const auto& ui : uis)
+	{
+		if (ui->GetState() == UIState::Active)
+			ui->Render();
+	}
+
+	SDL_RenderPresent(_renderer);
+}
+
+void RenderManager::Clear()
+{
+	//_sprites.clear();
+}
+
+void RenderManager::GridRender()
+{
 	const auto& currentScene = Manager::GetSceneManager()->GetCurrentScene();
 	auto sceneType = currentScene->GetSceneType();
 	if (sceneType == SceneType::Play)
@@ -149,28 +176,6 @@ void RenderManager::Render()
 			}
 		}
 	}
-
-	const auto& actors = Manager::GetSceneManager()->GetCurrentScene()->GetActors();
-	for (const auto& actor : actors)
-	{
-		auto sc = actor->GetSpriteComponent();
-		if (actor->GetState() == ActorState::Active && sc)
-			sc->Render();
-	}
-
-	const auto& uis = Manager::GetSceneManager()->GetCurrentScene()->GetUis();
-	for (const auto& ui : uis)
-	{
-		if (ui->GetState() == UIState::Active)
-			ui->Render();
-	}
-
-	SDL_RenderPresent(_renderer);
-}
-
-void RenderManager::Clear()
-{
-	//_sprites.clear();
 }
 
 //void RenderManager::AddSprite(std::shared_ptr<SpriteComponent> sprite)

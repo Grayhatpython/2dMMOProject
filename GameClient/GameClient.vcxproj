@@ -162,7 +162,8 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="AIState.h" />
-    <ClInclude Include="AnimSpriteComponent.h" />
+    <ClInclude Include="AnimSingleSpriteComponent.h" />
+    <ClInclude Include="AnimMultipleSpriteComponent.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="BoxComponent.h" />
@@ -215,7 +216,8 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AIState.cpp" />
-    <ClCompile Include="AnimSpriteComponent.cpp" />
+    <ClCompile Include="AnimSingleSpriteComponent.cpp" />
+    <ClCompile Include="AnimMultipleSpriteComponent.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="BoxComponent.cpp" />

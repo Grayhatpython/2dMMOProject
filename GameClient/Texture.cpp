@@ -19,6 +19,7 @@ bool Texture::Load(const std::string& fileName)
 
 	// Create texture from surface
 	auto renderer = Manager::GetRenderManager()->GetRenderer();
+	::SDL_SetColorKey(surf, SDL_TRUE, SDL_MapRGB(surf->format, 0, 128, 128));
 	_sdlTexture = ::SDL_CreateTextureFromSurface(renderer, surf);
 
 	if (_sdlTexture == nullptr)

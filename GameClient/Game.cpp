@@ -15,8 +15,11 @@ bool Game::Initialize()
 	Manager::GetInstance()->Initialize();
 	Manager::GetRenderManager()->Initialize(1280, 720);
 
-	std::shared_ptr<TitleScene> scene = std::make_shared<TitleScene>();
-	Manager::GetSceneManager()->SetCurrentScene(scene);
+	//std::shared_ptr<TitleScene> titleScene = std::make_shared<TitleScene>();
+	//Manager::GetSceneManager()->SetCurrentScene(titleScene);
+
+	std::shared_ptr<PlayScene> playScene = std::make_shared<PlayScene>();
+	Manager::GetSceneManager()->SetCurrentScene(playScene);
 
 	return true;
 }
@@ -43,7 +46,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
-	Manager::GetNetworkManager()->Update();
+	//Manager::GetNetworkManager()->Update();
 	Manager::GetTimeManager()->Update();
 	Manager::GetSceneManager()->Update();
 	Manager::GetPhysicsManager()->Update();

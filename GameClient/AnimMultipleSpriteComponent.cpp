@@ -1,21 +1,23 @@
 #include "pch.h"
-#include "AnimSpriteComponent.h"
+#include "AnimMultipleSpriteComponent.h"
 #include "Manager.h"
 #include "TimeManager.h"
 
-AnimSpriteComponent::AnimSpriteComponent(int32 drawOrder)
-	: SpriteComponent(ComponentType::AnimSprite, drawOrder)
+AnimMultipleSpriteComponent::AnimMultipleSpriteComponent(int32 drawOrder)
+	: SpriteComponent(ComponentType::AnimMultipleSprite, drawOrder)
 {
 
 }
 
-void AnimSpriteComponent::Update()
+void AnimMultipleSpriteComponent::Update()
 {
 	SpriteComponent::Update();
 
+	auto deltaTime = Manager::GetTimeManager()->GetDeltaTime();
+
 	if (_animTexture.size() > 0)
 	{
-		_currentFrame += _animFPS * Manager::GetTimeManager()->GetDeltaTime();
+		_currentFrame += _animFPS * deltaTime;
 
 		while (_currentFrame >= _animTexture.size())
 			_currentFrame -= _animTexture.size();
@@ -25,7 +27,7 @@ void AnimSpriteComponent::Update()
 	}
 }
 
-void AnimSpriteComponent::SetAnimTextures(const std::vector<std::shared_ptr<Texture>>& textures)
+void AnimMultipleSpriteComponent::SetAnimTextures(const std::vector<std::shared_ptr<Texture>>& textures)
 {
 	_animTexture = textures;
 	if (_animTexture.size() > 0)

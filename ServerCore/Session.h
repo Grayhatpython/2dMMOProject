@@ -3,6 +3,7 @@
 #include "IocpEvent.h"
 #include "NetAddress.h"
 #include "RecvBuffer.h"
+#include "concurrentqueue.h"
 
 /*--------------
 	Session
@@ -82,8 +83,9 @@ private:
 
 	RecvBuffer				_recvBuffer;
 
-	Queue<SendBufferRef>	_sendBufferQueue;
-	Atomic<bool>			_isSendRegistered = false;
+	Queue<SendBufferRef>						_sendBufferQueue;
+	moodycamel::ConcurrentQueue<SendBufferRef>	_lockFreeSendBufferQueue;
+	Atomic<bool>								_isSendRegistered = false;
 
 private:
 	//	수신은 송신과 달리 중첩되지 않고 처리 후에 다시 수신 등록을 한다.

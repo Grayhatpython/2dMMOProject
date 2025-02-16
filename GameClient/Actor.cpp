@@ -5,6 +5,7 @@
 #include "CircleComponent.h"
 #include "BoxComponent.h"
 #include "FollowCameraComponent.h"
+#include "AnimSingleSpriteComponent.h"
 Actor::Actor()
 {
 }
@@ -73,6 +74,10 @@ void Actor::OnCollision(std::shared_ptr<Actor> other)
 std::shared_ptr<SpriteComponent> Actor::GetSpriteComponent()
 {
 	auto component = GetComponent(ComponentType::Sprite);
+
+	if (component == nullptr)
+		component = GetComponent(ComponentType::AnimSingleSprite);
+
 	return std::static_pointer_cast<SpriteComponent>(component);
 }
 

@@ -13,7 +13,7 @@
 
 int main()
 {
-	std::this_thread::sleep_for(3s);
+	std::this_thread::sleep_for(1s);
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	//_CrtSetBreakAlloc(6610);
 	std::cout.imbue(std::locale(""));

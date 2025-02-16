@@ -49,8 +49,8 @@ double Monitoring::CpuUsage()
 	GetProcessTimes(_currentProcess, &ftime, &ftime, &fsys, &fuser);
 	memcpy(&sys, &fsys, sizeof(FILETIME));
 	memcpy(&user, &fuser, sizeof(FILETIME));
-	percent = (sys.QuadPart - _lastSysCPU.QuadPart) +
-		(user.QuadPart - _lastUserCPU.QuadPart);
+	percent = static_cast<double>((sys.QuadPart - _lastSysCPU.QuadPart) +
+		(user.QuadPart - _lastUserCPU.QuadPart));
 	percent /= (now.QuadPart - _lastCPU.QuadPart);
 	percent /= _numOfProcessors;
 	_lastCPU = now;

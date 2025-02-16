@@ -2,10 +2,10 @@
 #include "SpriteComponent.h"
 
 class Texture;
-class AnimSpriteComponent : public SpriteComponent
+class AnimMultipleSpriteComponent : public SpriteComponent
 {
 public:
-	AnimSpriteComponent(int32 drawOrder = 100);
+	AnimMultipleSpriteComponent(int32 drawOrder = 100);
 	void Update() override;
 
 public:

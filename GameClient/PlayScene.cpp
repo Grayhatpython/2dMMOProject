@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "PlayScene.h"
 #include "Ship.h"
-#include "AnimSpriteComponent.h"
 #include "Enemy.h"
 #include "Manager.h"
 #include "Grid.h"
@@ -17,6 +16,7 @@
 #include "UIDialog.h"
 #include "FollowActor.h"
 #include "FollowCameraComponent.h"
+#include "AnimSingleSpriteComponent.h"
 
 PlayScene::PlayScene()
 	: Scene(SceneType::Play)
@@ -37,51 +37,54 @@ void PlayScene::Initialize()
 	_grid->Initialize();
 
 	AddActor(_grid);
-	
-	Manager::GetAssetManager()->LoadText("../Common/Assets/English.gptext");
+	//
+	//Manager::GetAssetManager()->LoadText("../Common/Assets/English.gptext");
 
 	{
 		std::shared_ptr<Ship> ship = std::make_shared<Ship>();
-		std::shared_ptr<SpriteComponent> sc = std::make_shared<SpriteComponent>();
-		ship->AddComponent(sc);
+		std::shared_ptr<AnimSingleSpriteComponent> assc = std::make_shared<AnimSingleSpriteComponent>();
+		ship->AddComponent(assc);
 		ship->SetPosition(Vector2(704.f, 384.0f));
 
-		sc->SetTexture("../Common/Assets/Ship.png");
+		assc->AddAnimation(L"right_run", 0, 2, 32, 32, 12, 12.f);
+		assc->PlayAnimation(L"right_run");
 
-		std::shared_ptr<InputComponent> ic = std::make_shared<InputComponent>();
+		assc->SetTexture("../Common/Assets/Shizuka Sakai.png");
+
+		/*std::shared_ptr<InputComponent> ic = std::make_shared<InputComponent>();
 		ship->AddComponent(ic);
 
 		ic->SetForwardKey(SDL_SCANCODE_W);
 		ic->SetBackKey(SDL_SCANCODE_S);
 		ic->SetClockwiseKey(SDL_SCANCODE_A);
-		ic->SetCounterClockwiseKey(SDL_SCANCODE_D);
+		ic->SetCounterClockwiseKey(SDL_SCANCODE_D);*/
 
 		_camera->SetTarget(ship);
 
 		AddActor(ship);
 	}
 
-	// Create asteroids
-	for (int i = 0; i < 1; i++)
-	{
-		std::shared_ptr<Asteroid> as = std::make_shared<Asteroid>();
-		Vector2 randPos = Random::GetRandomVector(Vector2(0.f,0.0f),Vector2(512.0f, 384.0f));
-		as->SetPosition(randPos);
-		as->SetRotation(Random::GetRandom(0.0f, Math::TwoPi));
+	//// Create asteroids
+	//for (int i = 0; i < 1; i++)
+	//{
+	//	std::shared_ptr<Asteroid> as = std::make_shared<Asteroid>();
+	//	Vector2 randPos = Random::GetRandomVector(Vector2(0.f,0.0f),Vector2(512.0f, 384.0f));
+	//	as->SetPosition(randPos);
+	//	as->SetRotation(Random::GetRandom(0.0f, Math::TwoPi));
 
-		std::shared_ptr<SpriteComponent> sc = std::make_shared<SpriteComponent>();
-		as->AddComponent(sc);
+	//	std::shared_ptr<SpriteComponent> sc = std::make_shared<SpriteComponent>();
+	//	as->AddComponent(sc);
 
-		sc->SetTexture("../Common/Assets/Asteroid.png");
-		std::shared_ptr<BoxComponent> bc = std::make_shared<BoxComponent>();
-		as->AddComponent(bc);
+	//	sc->SetTexture("../Common/Assets/Asteroid.png");
+	//	std::shared_ptr<BoxComponent> bc = std::make_shared<BoxComponent>();
+	//	as->AddComponent(bc);
 
-		bc->SetCollisionLayer(CollisionLayer::Asteroid);
-		bc->SetCollisionMask(static_cast<int32>(CollisionLayer::Laser));
+	//	bc->SetCollisionLayer(CollisionLayer::Asteroid);
+	//	bc->SetCollisionMask(static_cast<int32>(CollisionLayer::Laser));
 
-		AddActor(as);
-		_asteroids.push_back(as);
-	}
+	//	AddActor(as);
+	//	_asteroids.push_back(as);
+	//}
 }
 
 void PlayScene::ProcessInput()

@@ -20,6 +20,9 @@ public:
 	//void AddSprite(std::shared_ptr<SpriteComponent> sprite);
 	//void RemoveSprite(std::shared_ptr<SpriteComponent> sprite);
 
+private:
+	void GridRender();
+
 public:
 
 	SDL_Renderer*	GetRenderer() { return _renderer; }
