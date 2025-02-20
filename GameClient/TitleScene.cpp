@@ -72,11 +72,11 @@ void TitleScene::OnConnected()
 {
 	_state = TitleSceneState::ConnectedToServer;
 
-	Protocol::C_TEST testPacket;
-	testPacket.set_temp(1);
+	//Protocol::C_TEST testPacket;
+	//testPacket.set_temp(1);
 
-	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(testPacket);
-	Manager::GetNetworkManager()->Send(sendBuffer);
+	//auto sendBuffer = ServerPacketHandler::MakeSendBuffer(testPacket);
+	//Manager::GetNetworkManager()->Send(sendBuffer);
 }
 
 void TitleScene::OnConnectFailed()

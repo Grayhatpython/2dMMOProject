@@ -17,3 +17,27 @@ bool S_CONNECTED_Packet_Processing_Function(std::shared_ptr<PacketSession>& sess
 	return true;
 }
 
+bool S_ENTERGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_ENTERGAME& packet)
+{
+	return true;
+}
+
+bool S_LEAVEGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_LEAVEGAME& packet)
+{
+	return true;
+}
+
+bool S_SPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_SPAWN& packet)
+{
+	return true;
+}
+
+bool S_DESPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_DESPAWN& packet)
+{
+	return true;
+}
+
+bool S_MOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_MOVE& packet)
+{
+	return true;
+}

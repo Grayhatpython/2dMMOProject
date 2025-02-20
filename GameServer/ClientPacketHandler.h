@@ -8,14 +8,21 @@ enum : uint16
 {
 //	Auto
 	PACKET_S_CONNECTED = 1,
-	PACKET_C_TEST = 2,
+	PACKET_C_ENTERGAME = 2,
+	PACKET_S_ENTERGAME = 3,
+	PACKET_S_LEAVEGAME = 4,
+	PACKET_S_SPAWN = 5,
+	PACKET_S_DESPAWN = 6,
+	PACKET_C_MOVE = 7,
+	PACKET_S_MOVE = 8,
 
 };
 
 //	Custom Packet Processing Function
 bool Packet_Processing_Function_Undefined(std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len);
 //	Auto
-bool C_TEST_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::C_TEST& packet);
+bool C_ENTERGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::C_ENTERGAME& packet);
+bool C_MOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::C_MOVE& packet);
 
 
 class ClientPacketHandler
@@ -28,7 +35,8 @@ public:
 
 		//	Register Function
 		//	Auto
-		GPacketPacketProcessingFunction[PACKET_C_TEST] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::C_TEST>(C_TEST_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_C_ENTERGAME] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::C_ENTERGAME>(C_ENTERGAME_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_C_MOVE] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::C_MOVE>(C_MOVE_Packet_Processing_Function, session, buffer, len); };
 
 	}
 
@@ -41,6 +49,11 @@ public:
 public:
 	//	Auto
 	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_CONNECTED& packet) { return TMakeSendBuffer(packet, PACKET_S_CONNECTED); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_ENTERGAME& packet) { return TMakeSendBuffer(packet, PACKET_S_ENTERGAME); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_LEAVEGAME& packet) { return TMakeSendBuffer(packet, PACKET_S_LEAVEGAME); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_SPAWN& packet) { return TMakeSendBuffer(packet, PACKET_S_SPAWN); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_DESPAWN& packet) { return TMakeSendBuffer(packet, PACKET_S_DESPAWN); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MOVE& packet) { return TMakeSendBuffer(packet, PACKET_S_MOVE); }
 
 
 private:

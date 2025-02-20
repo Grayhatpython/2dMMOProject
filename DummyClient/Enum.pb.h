@@ -56,32 +56,115 @@ PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
-enum CreatureState : int {
-  CREATURE_STATE_IDLE = 0,
-  CREATURE_STATE_MOVING = 1,
-  CREATURE_STATE_SKILL = 2,
-  CREATURE_STATE_DEAD = 3,
-  CreatureState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
-  CreatureState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+enum ActorState : int {
+  ACTOR_STATE_NONE = 0,
+  ACTOR_STATE_IDLE = 1,
+  ACTOR_STATE_MOVING = 2,
+  ACTOR_STATE_SKILL = 3,
+  ACTOR_STATE_DEAD = 4,
+  ActorState_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ActorState_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
-bool CreatureState_IsValid(int value);
-constexpr CreatureState CreatureState_MIN = CREATURE_STATE_IDLE;
-constexpr CreatureState CreatureState_MAX = CREATURE_STATE_DEAD;
-constexpr int CreatureState_ARRAYSIZE = CreatureState_MAX + 1;
+bool ActorState_IsValid(int value);
+constexpr ActorState ActorState_MIN = ACTOR_STATE_NONE;
+constexpr ActorState ActorState_MAX = ACTOR_STATE_DEAD;
+constexpr int ActorState_ARRAYSIZE = ActorState_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CreatureState_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ActorState_descriptor();
 template<typename T>
-inline const std::string& CreatureState_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, CreatureState>::value ||
+inline const std::string& ActorState_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ActorState>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function CreatureState_Name.");
+    "Incorrect type passed to function ActorState_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    CreatureState_descriptor(), enum_t_value);
+    ActorState_descriptor(), enum_t_value);
 }
-inline bool CreatureState_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, CreatureState* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<CreatureState>(
-    CreatureState_descriptor(), name, value);
+inline bool ActorState_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ActorState* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ActorState>(
+    ActorState_descriptor(), name, value);
+}
+enum ActorType : int {
+  ACTOR_TYPE_NONE = 0,
+  ACTOR_TYPE_PLAYER = 1,
+  ACTOR_TYPE_MONSTER = 2,
+  ACTOR_TYPE_PROJECTILE = 3,
+  ACTOR_TYPE_ITEM_HOLDER = 4,
+  ActorType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ActorType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ActorType_IsValid(int value);
+constexpr ActorType ActorType_MIN = ACTOR_TYPE_NONE;
+constexpr ActorType ActorType_MAX = ACTOR_TYPE_ITEM_HOLDER;
+constexpr int ActorType_ARRAYSIZE = ActorType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ActorType_descriptor();
+template<typename T>
+inline const std::string& ActorType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ActorType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ActorType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ActorType_descriptor(), enum_t_value);
+}
+inline bool ActorType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, ActorType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ActorType>(
+    ActorType_descriptor(), name, value);
+}
+enum TileCollisionType : int {
+  TILE_COLLISION_TYPE_NONE = 0,
+  TILE_COLLISION_TYPE_ENV = 1,
+  TileCollisionType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  TileCollisionType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool TileCollisionType_IsValid(int value);
+constexpr TileCollisionType TileCollisionType_MIN = TILE_COLLISION_TYPE_NONE;
+constexpr TileCollisionType TileCollisionType_MAX = TILE_COLLISION_TYPE_ENV;
+constexpr int TileCollisionType_ARRAYSIZE = TileCollisionType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TileCollisionType_descriptor();
+template<typename T>
+inline const std::string& TileCollisionType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, TileCollisionType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function TileCollisionType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    TileCollisionType_descriptor(), enum_t_value);
+}
+inline bool TileCollisionType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, TileCollisionType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<TileCollisionType>(
+    TileCollisionType_descriptor(), name, value);
+}
+enum FindPathResult : int {
+  FIND_PATH_RESULT_NONE = 0,
+  FIND_PATH_RESULT_FAIL_LERPCELL = 1,
+  FIND_PATH_RESULT_FAIL_NO_PATH = 2,
+  FIND_PATH_RESULT_FAIL_MOVE_TO = 3,
+  FIND_PATH_RESULT_FAIL_SAME_POSITION = 4,
+  FIND_PATH_RESULT_SUCCESS = 5,
+  FindPathResult_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  FindPathResult_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool FindPathResult_IsValid(int value);
+constexpr FindPathResult FindPathResult_MIN = FIND_PATH_RESULT_NONE;
+constexpr FindPathResult FindPathResult_MAX = FIND_PATH_RESULT_SUCCESS;
+constexpr int FindPathResult_ARRAYSIZE = FindPathResult_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* FindPathResult_descriptor();
+template<typename T>
+inline const std::string& FindPathResult_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, FindPathResult>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function FindPathResult_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    FindPathResult_descriptor(), enum_t_value);
+}
+inline bool FindPathResult_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, FindPathResult* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<FindPathResult>(
+    FindPathResult_descriptor(), name, value);
 }
 enum MoveDir : int {
   MOVE_DIR_NONE = 0,
@@ -137,10 +220,25 @@ inline bool MoveDir_Parse(
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Protocol::CreatureState> : ::std::true_type {};
+template <> struct is_proto_enum< ::Protocol::ActorState> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::CreatureState>() {
-  return ::Protocol::CreatureState_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::ActorState>() {
+  return ::Protocol::ActorState_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::ActorType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::ActorType>() {
+  return ::Protocol::ActorType_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::TileCollisionType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::TileCollisionType>() {
+  return ::Protocol::TileCollisionType_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::FindPathResult> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::FindPathResult>() {
+  return ::Protocol::FindPathResult_descriptor();
 }
 template <> struct is_proto_enum< ::Protocol::MoveDir> : ::std::true_type {};
 template <>

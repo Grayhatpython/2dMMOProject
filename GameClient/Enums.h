@@ -8,6 +8,7 @@ namespace Enums
 
 	enum class ComponentType : uint8
 	{
+		Transform,
 		AI,
 		Nav,
 		Move,
@@ -19,6 +20,7 @@ namespace Enums
 		AnimMultipleSprite,
 		Camera,
 		FollowCamera,
+		Grid,
 		End,
 	};
 
@@ -31,14 +33,14 @@ namespace Enums
 
 #pragma region Actor
 
-	enum ActorState
+	enum class ActorState
 	{
 		Active,
 		Paused,
 		Dead
 	};
 
-	enum TileState
+	enum class TileState
 	{
 		Default,
 		Path,

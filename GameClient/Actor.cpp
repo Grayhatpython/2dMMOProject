@@ -1,11 +1,14 @@
 #include "pch.h"
 #include "Actor.h"
 #include "Component.h"
+#include "TransformComponent.h"
 #include "SpriteComponent.h"
 #include "CircleComponent.h"
 #include "BoxComponent.h"
 #include "FollowCameraComponent.h"
 #include "AnimSingleSpriteComponent.h"
+#include "GridComponent.h"
+
 Actor::Actor()
 {
 }
@@ -22,6 +25,7 @@ Actor::~Actor()
 
 void Actor::Initialize()
 {
+
 }
 
 void Actor::Update()
@@ -71,6 +75,12 @@ void Actor::OnCollision(std::shared_ptr<Actor> other)
 {
 }
 
+std::shared_ptr<TransformComponent> Actor::GetTransformComponent()
+{
+	auto component = GetComponent(ComponentType::Transform);
+	return std::static_pointer_cast<TransformComponent>(component);
+}
+
 std::shared_ptr<SpriteComponent> Actor::GetSpriteComponent()
 {
 	auto component = GetComponent(ComponentType::Sprite);
@@ -97,6 +107,12 @@ std::shared_ptr<FollowCameraComponent> Actor::GetFollowCameraComponent()
 {
 	auto component = GetComponent(ComponentType::FollowCamera);
 	return std::static_pointer_cast<FollowCameraComponent>(component);
+}
+
+std::shared_ptr<GridComponent> Actor::GetGridComponent()
+{
+	auto component = GetComponent(ComponentType::Grid);
+	return std::static_pointer_cast<GridComponent>(component);
 }
 
 void Actor::AddComponent(std::shared_ptr<Component> component)

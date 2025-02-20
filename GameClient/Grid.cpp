@@ -199,6 +199,7 @@ void Grid::BuildTower()
 	}
 }
 
+
 std::shared_ptr<Tile> Grid::GetStartTile()
 {
 	return _tiles[3][0];

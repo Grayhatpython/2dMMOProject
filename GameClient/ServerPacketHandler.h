@@ -8,7 +8,13 @@ enum : uint16
 {
 //	Auto
 	PACKET_S_CONNECTED = 1,
-	PACKET_C_TEST = 2,
+	PACKET_C_ENTERGAME = 2,
+	PACKET_S_ENTERGAME = 3,
+	PACKET_S_LEAVEGAME = 4,
+	PACKET_S_SPAWN = 5,
+	PACKET_S_DESPAWN = 6,
+	PACKET_C_MOVE = 7,
+	PACKET_S_MOVE = 8,
 
 };
 
@@ -16,6 +22,11 @@ enum : uint16
 bool Packet_Processing_Function_Undefined(std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len);
 //	Auto
 bool S_CONNECTED_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_CONNECTED& packet);
+bool S_ENTERGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_ENTERGAME& packet);
+bool S_LEAVEGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_LEAVEGAME& packet);
+bool S_SPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_SPAWN& packet);
+bool S_DESPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_DESPAWN& packet);
+bool S_MOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_MOVE& packet);
 
 
 class ServerPacketHandler
@@ -29,6 +40,11 @@ public:
 		//	Register Function
 		//	Auto
 		GPacketPacketProcessingFunction[PACKET_S_CONNECTED] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_CONNECTED>(S_CONNECTED_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_S_ENTERGAME] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_ENTERGAME>(S_ENTERGAME_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_S_LEAVEGAME] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_LEAVEGAME>(S_LEAVEGAME_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_S_SPAWN] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_SPAWN>(S_SPAWN_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_S_DESPAWN] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_DESPAWN>(S_DESPAWN_Packet_Processing_Function, session, buffer, len); };
+		GPacketPacketProcessingFunction[PACKET_S_MOVE] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) { return TPacketProcessing<Protocol::S_MOVE>(S_MOVE_Packet_Processing_Function, session, buffer, len); };
 
 	}
 
@@ -40,7 +56,8 @@ public:
 
 public:
 	//	Auto
-	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_TEST& packet) { return TMakeSendBuffer(packet, PACKET_C_TEST); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_ENTERGAME& packet) { return TMakeSendBuffer(packet, PACKET_C_ENTERGAME); }
+	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_MOVE& packet) { return TMakeSendBuffer(packet, PACKET_C_MOVE); }
 
 
 private:

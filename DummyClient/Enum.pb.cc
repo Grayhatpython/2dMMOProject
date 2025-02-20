@@ -18,26 +18,37 @@
 PROTOBUF_PRAGMA_INIT_SEG
 namespace Protocol {
 }  // namespace Protocol
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[2];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[5];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010Protocol*v\n\rCreatureState\022"
-  "\027\n\023CREATURE_STATE_IDLE\020\000\022\031\n\025CREATURE_STA"
-  "TE_MOVING\020\001\022\030\n\024CREATURE_STATE_SKILL\020\002\022\027\n"
-  "\023CREATURE_STATE_DEAD\020\003*\305\001\n\007MoveDir\022\021\n\rMO"
-  "VE_DIR_NONE\020\000\022\017\n\013MOVE_DIR_UP\020\001\022\021\n\rMOVE_D"
-  "IR_DOWN\020\002\022\021\n\rMOVE_DIR_LEFT\020\003\022\022\n\016MOVE_DIR"
-  "_RIGHT\020\004\022\024\n\020MOVE_DIR_UP_LEFT\020\005\022\025\n\021MOVE_D"
-  "IR_UP_RIGHT\020\006\022\026\n\022MOVE_DIR_DOWN_LEFT\020\007\022\027\n"
-  "\023MOVE_DIR_DOWN_RIGHT\020\010b\006proto3"
+  "\n\nEnum.proto\022\010Protocol*}\n\nActorState\022\024\n\020"
+  "ACTOR_STATE_NONE\020\000\022\024\n\020ACTOR_STATE_IDLE\020\001"
+  "\022\026\n\022ACTOR_STATE_MOVING\020\002\022\025\n\021ACTOR_STATE_"
+  "SKILL\020\003\022\024\n\020ACTOR_STATE_DEAD\020\004*\206\001\n\tActorT"
+  "ype\022\023\n\017ACTOR_TYPE_NONE\020\000\022\025\n\021ACTOR_TYPE_P"
+  "LAYER\020\001\022\026\n\022ACTOR_TYPE_MONSTER\020\002\022\031\n\025ACTOR"
+  "_TYPE_PROJECTILE\020\003\022\032\n\026ACTOR_TYPE_ITEM_HO"
+  "LDER\020\004*N\n\021TileCollisionType\022\034\n\030TILE_COLL"
+  "ISION_TYPE_NONE\020\000\022\033\n\027TILE_COLLISION_TYPE"
+  "_ENV\020\001*\334\001\n\016FindPathResult\022\031\n\025FIND_PATH_R"
+  "ESULT_NONE\020\000\022\"\n\036FIND_PATH_RESULT_FAIL_LE"
+  "RPCELL\020\001\022!\n\035FIND_PATH_RESULT_FAIL_NO_PAT"
+  "H\020\002\022!\n\035FIND_PATH_RESULT_FAIL_MOVE_TO\020\003\022\'"
+  "\n#FIND_PATH_RESULT_FAIL_SAME_POSITION\020\004\022"
+  "\034\n\030FIND_PATH_RESULT_SUCCESS\020\005*\305\001\n\007MoveDi"
+  "r\022\021\n\rMOVE_DIR_NONE\020\000\022\017\n\013MOVE_DIR_UP\020\001\022\021\n"
+  "\rMOVE_DIR_DOWN\020\002\022\021\n\rMOVE_DIR_LEFT\020\003\022\022\n\016M"
+  "OVE_DIR_RIGHT\020\004\022\024\n\020MOVE_DIR_UP_LEFT\020\005\022\025\n"
+  "\021MOVE_DIR_UP_RIGHT\020\006\022\026\n\022MOVE_DIR_DOWN_LE"
+  "FT\020\007\022\027\n\023MOVE_DIR_DOWN_RIGHT\020\010b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Enum_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Enum_2eproto = {
-  false, false, 350, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
+  false, false, 797, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
   &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
   nullptr, file_level_enum_descriptors_Enum_2eproto, file_level_service_descriptors_Enum_2eproto,
@@ -49,16 +60,66 @@ PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_Enum_2eproto(&descriptor_table_Enum_2eproto);
 namespace Protocol {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CreatureState_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ActorState_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[0];
 }
-bool CreatureState_IsValid(int value) {
+bool ActorState_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
     case 2:
     case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ActorType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[1];
+}
+bool ActorType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TileCollisionType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[2];
+}
+bool TileCollisionType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* FindPathResult_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[3];
+}
+bool FindPathResult_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -67,7 +128,7 @@ bool CreatureState_IsValid(int value) {
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MoveDir_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
-  return file_level_enum_descriptors_Enum_2eproto[1];
+  return file_level_enum_descriptors_Enum_2eproto[4];
 }
 bool MoveDir_IsValid(int value) {
   switch (value) {

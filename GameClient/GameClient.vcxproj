@@ -168,10 +168,16 @@
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Creature.h" />
+    <ClInclude Include="GridComponent.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="PacketQueue.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ServerInstance.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleComponent.h" />
@@ -222,10 +228,16 @@
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="GridComponent.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="PacketQueue.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ServerInstance.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
@@ -277,6 +289,11 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="UIScreen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\Protoc\Enum.proto" />
+    <None Include="..\Common\Protoc\Protocol.proto" />
+    <None Include="..\Common\Protoc\Struct.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
